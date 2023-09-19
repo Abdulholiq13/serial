@@ -1,0 +1,27 @@
+{
+  "name": "serial",
+  "version": "1.0.0",
+  "description": "JavaScript from 0 to hero",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [
+    "js",
+    "html",
+    "serial",
+    "serialize",
+    "serialize-html"
+  ],
+  "author": "Samar Badriddinov",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "webpack": "^5.88.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "webpack-cli": "^5.1.4"
+  }
+}
