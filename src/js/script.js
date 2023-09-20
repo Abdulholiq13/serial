@@ -1,11 +1,11 @@
-import clas from '../modules/class'
-import form from '../modules/form'
-import loader from '../modules/loader'
-import modal from '../modules/modal'
-import slider from '../modules/slider'
-import tab from '../modules/tab'
-import timer from '../modules/timer'
-import { openModal } from '../modules/modal'
+import clas from '../modules/class.js'
+import form from '../modules/form.js'
+import loader from '../modules/loader.js'
+import modal from '../modules/modal.js'
+import slider from '../modules/slider.js'
+import tab from '../modules/tab.js'
+import timer from '../modules/timer.js'
+import { openModal } from '../modules/modal.js'
 
 window.addEventListener('DOMContentLoaded', () => {
     const modalTimerId = setTimeout(

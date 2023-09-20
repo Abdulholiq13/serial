@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ "./src/modules/modal.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../server/server'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _server_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../server/server */ "./src/server/server.js");
 
 
 
@@ -121,7 +121,7 @@ function form(formSelector, modalTimerId) {
 
             const json = JSON.stringify(Object.fromEntries(formData.entries()))
 
-            Object(function webpackMissingModule() { var e = new Error("Cannot find module '../server/server'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())('http://localhost:3000/request', json)
+            ;(0,_server_server__WEBPACK_IMPORTED_MODULE_1__.postData)('http://localhost:3000/request', json)
                 .then((data) => {
                     console.log(data)
                     showThanksModal(msg.success)
@@ -163,6 +163,7 @@ function form(formSelector, modalTimerId) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (form);
 
+
 /***/ }),
 
 /***/ "./src/modules/loader.js":
@@ -188,6 +189,7 @@ function loader() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loader);
+
 
 /***/ }),
 
@@ -260,6 +262,7 @@ function modal(triggerSelector, modalSelector, modalTimerId) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);
 
 
+
 /***/ }),
 
 /***/ "./src/modules/slider.js":
@@ -273,131 +276,132 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function slider({
-  container,
-  slide,
-  nextArrow,
-  prevArrow,
-  totalCounter,
-  currentCounter,
-  wrapper,
-  field,
+    container,
+    slide,
+    nextArrow,
+    prevArrow,
+    totalCounter,
+    currentCounter,
+    wrapper,
+    field,
 }) {
-  // Slider
-  const slides = document.querySelectorAll(slide),
-      next = document.querySelector(nextArrow),
-      prev = document.querySelector(prevArrow),
-      total = document.querySelector(totalCounter),
-      current = document.querySelector(currentCounter),
-      slidesWrapper = document.querySelector(wrapper),
-      slidesField = document.querySelector(field),
-      width = window.getComputedStyle(slidesWrapper).width,
-      slider = document.querySelector(container)
+    // Slider
+    const slides = document.querySelectorAll(slide),
+        next = document.querySelector(nextArrow),
+        prev = document.querySelector(prevArrow),
+        total = document.querySelector(totalCounter),
+        current = document.querySelector(currentCounter),
+        slidesWrapper = document.querySelector(wrapper),
+        slidesField = document.querySelector(field),
+        width = window.getComputedStyle(slidesWrapper).width,
+        slider = document.querySelector(container)
 
-  let slideIndex = 1
-  let offset = 0
+    let slideIndex = 1
+    let offset = 0
 
-  if (slides.length < 10) {
-      total.textContent = `0${slides.length}`
-      current.textContent = `0${slideIndex}`
-  } else {
-      total.textContent = slides.length
-      current.textContent = slideIndex
-  }
+    if (slides.length < 10) {
+        total.textContent = `0${slides.length}`
+        current.textContent = `0${slideIndex}`
+    } else {
+        total.textContent = slides.length
+        current.textContent = slideIndex
+    }
 
-  slidesField.style.width = 100 * slides.length + '%'
-  slidesField.style.display = 'flex'
-  slidesField.style.transition = '.5s ease all'
-  slidesWrapper.style.overflow = 'hidden'
+    slidesField.style.width = 100 * slides.length + '%'
+    slidesField.style.display = 'flex'
+    slidesField.style.transition = '.5s ease all'
+    slidesWrapper.style.overflow = 'hidden'
 
-  slides.forEach((slide) => {
-      slide.style.width = width
-  })
+    slides.forEach((slide) => {
+        slide.style.width = width
+    })
 
-  const indicators = document.createElement('ol')
-  const dots = []
-  indicators.classList.add('carousel-indicators')
-  slider.append(indicators)
+    const indicators = document.createElement('ol')
+    const dots = []
+    indicators.classList.add('carousel-indicators')
+    slider.append(indicators)
 
-  for (let i = 0; i < slides.length; i++) {
-      const dot = document.createElement('li')
-      dot.setAttribute('data-slide-to', i + 1)
-      dot.classList.add('carousel-dot')
-      if (i == 0) {
-          dot.style.opacity = 1
-      }
-      indicators.append(dot)
-      dots.push(dot)
-  }
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('li')
+        dot.setAttribute('data-slide-to', i + 1)
+        dot.classList.add('carousel-dot')
+        if (i == 0) {
+            dot.style.opacity = 1
+        }
+        indicators.append(dot)
+        dots.push(dot)
+    }
 
-  next.addEventListener('click', () => {
-      if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
-          offset = 0
-      } else {
-          offset += +width.slice(0, width.length - 2)
-      }
-      slidesField.style.transform = `translateX(-${offset}px)`
+    next.addEventListener('click', () => {
+        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+            offset = 0
+        } else {
+            offset += +width.slice(0, width.length - 2)
+        }
+        slidesField.style.transform = `translateX(-${offset}px)`
 
-      if (slideIndex == slides.length) {
-          slideIndex = 1
-      } else {
-          slideIndex++
-      }
+        if (slideIndex == slides.length) {
+            slideIndex = 1
+        } else {
+            slideIndex++
+        }
 
-      if (slides.length < 10) {
-          current.textContent = `0${slideIndex}`
-      } else {
-          current.textContent = slideIndex
-      }
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`
+        } else {
+            current.textContent = slideIndex
+        }
 
-      dots.forEach((dot) => (dot.style.opacity = '.5'))
-      dots[slideIndex - 1].style.opacity = 1
-  })
+        dots.forEach((dot) => (dot.style.opacity = '.5'))
+        dots[slideIndex - 1].style.opacity = 1
+    })
 
-  prev.addEventListener('click', () => {
-      if (offset == 0) {
-          offset = +width.slice(0, width.length - 2) * (slides.length - 1)
-      } else {
-          offset -= +width.slice(0, width.length - 2)
-      }
-      slidesField.style.transform = `translateX(-${offset}px)`
+    prev.addEventListener('click', () => {
+        if (offset == 0) {
+            offset = +width.slice(0, width.length - 2) * (slides.length - 1)
+        } else {
+            offset -= +width.slice(0, width.length - 2)
+        }
+        slidesField.style.transform = `translateX(-${offset}px)`
 
-      if (slideIndex == 1) {
-          slideIndex = slides.length
-      } else {
-          slideIndex--
-      }
+        if (slideIndex == 1) {
+            slideIndex = slides.length
+        } else {
+            slideIndex--
+        }
 
-      if (slides.length < 10) {
-          current.textContent = `0${slideIndex}`
-      } else {
-          current.textContent = slideIndex
-      }
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`
+        } else {
+            current.textContent = slideIndex
+        }
 
-      dots.forEach((dot) => (dot.style.opacity = '.5'))
-      dots[slideIndex - 1].style.opacity = 1
-  })
+        dots.forEach((dot) => (dot.style.opacity = '.5'))
+        dots[slideIndex - 1].style.opacity = 1
+    })
 
-  dots.forEach((dot) => {
-      dot.addEventListener('click', (e) => {
-          const slideTo = e.target.getAttribute('data-slide-to')
+    dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+            const slideTo = e.target.getAttribute('data-slide-to')
 
-          slideIndex = slideTo
-          offset = +width.slice(0, width.length - 2) * (slideTo - 1)
-          slidesField.style.transform = `translateX(-${offset}px)`
+            slideIndex = slideTo
+            offset = +width.slice(0, width.length - 2) * (slideTo - 1)
+            slidesField.style.transform = `translateX(-${offset}px)`
 
-          if (slides.length < 10) {
-              current.textContent = `0${slideIndex}`
-          } else {
-              current.textContent = slideIndex
-          }
+            if (slides.length < 10) {
+                current.textContent = `0${slideIndex}`
+            } else {
+                current.textContent = slideIndex
+            }
 
-          dots.forEach((dot) => (dot.style.opacity = '.5'))
-          dots[slideIndex - 1].style.opacity = 1
-      })
-  })
+            dots.forEach((dot) => (dot.style.opacity = '.5'))
+            dots[slideIndex - 1].style.opacity = 1
+        })
+    })
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);
+
 
 /***/ }),
 
@@ -412,50 +416,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function tab(
-  tabsSelector,
-  tabsContentSelector,
-  tabsParentSelector,
-  activeClass
+    tabsSelector,
+    tabsContentSelector,
+    tabsParentSelector,
+    activeClass
 ) {
-  // Tabs
-  const tabsParent = document.querySelector(tabsParentSelector),
-      tabs = document.querySelectorAll(tabsSelector),
-      tabsContent = document.querySelectorAll(tabsContentSelector)
+    // Tabs
+    const tabsParent = document.querySelector(tabsParentSelector),
+        tabs = document.querySelectorAll(tabsSelector),
+        tabsContent = document.querySelectorAll(tabsContentSelector)
 
-  function hideTabContent() {
-      tabsContent.forEach((item) => {
-          item.classList.add('hide')
-          item.classList.remove('show', 'fade')
-      })
+    function hideTabContent() {
+        tabsContent.forEach((item) => {
+            item.classList.add('hide')
+            item.classList.remove('show', 'fade')
+        })
 
-      tabs.forEach((item) => {
-          item.classList.remove(activeClass)
-      })
-  }
+        tabs.forEach((item) => {
+            item.classList.remove(activeClass)
+        })
+    }
 
-  function showTabContent(i = 0) {
-      tabsContent[i].classList.add('show', 'fade')
-      tabsContent[i].classList.remove('hide')
-      tabs[i].classList.add(activeClass)
-  }
+    function showTabContent(i = 0) {
+        tabsContent[i].classList.add('show', 'fade')
+        tabsContent[i].classList.remove('hide')
+        tabs[i].classList.add(activeClass)
+    }
 
-  hideTabContent()
-  showTabContent()
+    hideTabContent()
+    showTabContent()
 
-  tabsParent.addEventListener('click', (event) => {
-      const target = event.target
-      if (target && target.classList.contains(tabsSelector.slice(1))) {
-          tabs.forEach((item, idx) => {
-              if (target == item) {
-                  hideTabContent()
-                  showTabContent(idx)
-              }
-          })
-      }
-  })
+    tabsParent.addEventListener('click', (event) => {
+        const target = event.target
+        if (target && target.classList.contains(tabsSelector.slice(1))) {
+            tabs.forEach((item, idx) => {
+                if (target == item) {
+                    hideTabContent()
+                    showTabContent(idx)
+                }
+            })
+        }
+    })
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tab);
+
 
 /***/ }),
 
@@ -470,62 +475,94 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 function timer(id, deadline) {
-  // Timer
-  function getTimeRemaining(endtime) {
-      let days, hours, minutes, seconds
-      const timer = Date.parse(endtime) - Date.parse(new Date())
+    // Timer
+    function getTimeRemaining(endtime) {
+        let days, hours, minutes, seconds
+        const timer = Date.parse(endtime) - Date.parse(new Date())
 
-      if (timer <= 0) {
-          days = 0
-          hours = 0
-          minutes = 0
-          seconds = 0
-      } else {
-          days = Math.floor(timer / (1000 * 60 * 60 * 24))
-          hours = Math.floor((timer / (1000 * 60 * 60)) % 24)
-          minutes = Math.floor((timer / 1000 / 60) % 60)
-          seconds = Math.floor((timer / 1000) % 60)
-      }
+        if (timer <= 0) {
+            days = 0
+            hours = 0
+            minutes = 0
+            seconds = 0
+        } else {
+            days = Math.floor(timer / (1000 * 60 * 60 * 24))
+            hours = Math.floor((timer / (1000 * 60 * 60)) % 24)
+            minutes = Math.floor((timer / 1000 / 60) % 60)
+            seconds = Math.floor((timer / 1000) % 60)
+        }
 
-      return { timer, days, hours, minutes, seconds }
-  }
+        return { timer, days, hours, minutes, seconds }
+    }
 
-  function getZero(num) {
-      if (num >= 0 && num < 10) {
-          return `0${num}`
-      } else {
-          return num
-      }
-  }
+    function getZero(num) {
+        if (num >= 0 && num < 10) {
+            return `0${num}`
+        } else {
+            return num
+        }
+    }
 
-  function setClock(selector, endtime) {
-      const timer = document.querySelector(selector),
-          days = timer.querySelector('#days'),
-          hours = timer.querySelector('#hours'),
-          minutes = timer.querySelector('#minutes'),
-          seconds = timer.querySelector('#seconds'),
-          timeInterval = setInterval(updatClock, 1000)
+    function setClock(selector, endtime) {
+        const timer = document.querySelector(selector),
+            days = timer.querySelector('#days'),
+            hours = timer.querySelector('#hours'),
+            minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updatClock, 1000)
 
-      updatClock()
+        updatClock()
 
-      function updatClock() {
-          const t = getTimeRemaining(endtime)
+        function updatClock() {
+            const t = getTimeRemaining(endtime)
 
-          days.innerHTML = getZero(t.days)
-          hours.innerHTML = getZero(t.hours)
-          minutes.innerHTML = getZero(t.minutes)
-          seconds.innerHTML = getZero(t.seconds)
+            days.innerHTML = getZero(t.days)
+            hours.innerHTML = getZero(t.hours)
+            minutes.innerHTML = getZero(t.minutes)
+            seconds.innerHTML = getZero(t.seconds)
 
-          if (t.timer <= 0) {
-              clearInterval(timeInterval)
-          }
-      }
-  }
+            if (t.timer <= 0) {
+                clearInterval(timeInterval)
+            }
+        }
+    }
 
-  setClock(id, deadline)
+    setClock(id, deadline)
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (timer);
+
+
+/***/ }),
+
+/***/ "./src/server/server.js":
+/*!******************************!*\
+  !*** ./src/server/server.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   postData: () => (/* binding */ postData)
+/* harmony export */ });
+async function postData(url, data) {
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data,
+    })
+
+    if (!res.ok) {
+        throw new Error(`Could not fetch ${url}, status: ${res.status}`)
+    }
+
+    return await res.json()
+}
+
+
+
 
 /***/ })
 
@@ -592,13 +629,13 @@ var __webpack_exports__ = {};
   !*** ./src/js/script.js ***!
   \**************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_class__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/class */ "./src/modules/class.js");
-/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/form */ "./src/modules/form.js");
-/* harmony import */ var _modules_loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/loader */ "./src/modules/loader.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/modal */ "./src/modules/modal.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modules/slider */ "./src/modules/slider.js");
-/* harmony import */ var _modules_tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modules/tab */ "./src/modules/tab.js");
-/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modules/timer */ "./src/modules/timer.js");
+/* harmony import */ var _modules_class_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/class.js */ "./src/modules/class.js");
+/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/form.js */ "./src/modules/form.js");
+/* harmony import */ var _modules_loader_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/loader.js */ "./src/modules/loader.js");
+/* harmony import */ var _modules_modal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/modal.js */ "./src/modules/modal.js");
+/* harmony import */ var _modules_slider_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modules/slider.js */ "./src/modules/slider.js");
+/* harmony import */ var _modules_tab_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modules/tab.js */ "./src/modules/tab.js");
+/* harmony import */ var _modules_timer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modules/timer.js */ "./src/modules/timer.js");
 
 
 
@@ -609,74 +646,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  const modalTimerId = setTimeout(
-    () => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__.openModal)('.modal', modalTimerId),
-    50000
-  )
+    const modalTimerId = setTimeout(
+        () => (0,_modules_modal_js__WEBPACK_IMPORTED_MODULE_3__.openModal)('.modal', modalTimerId),
+        50000
+    )
 
-  ;(0,_modules_class__WEBPACK_IMPORTED_MODULE_0__["default"])()
-  ;(0,_modules_form__WEBPACK_IMPORTED_MODULE_1__["default"])('form', modalTimerId)
-  ;(0,_modules_loader__WEBPACK_IMPORTED_MODULE_2__["default"])()
-  ;(0,_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('[data-modal]', '.modal', modalTimerId)
-  ;(0,_modules_slider__WEBPACK_IMPORTED_MODULE_4__["default"])({
-    container: '.offer__slider',
-    nextArrow: '.offer__slider-next',
-    prevArrow: '.offer__slider-prev',
-    slide: '.offer__slide',
-    totalCounter: '#total',
-    currentCounter: '#current',
-    wrapper: '.offer__slider-wrapper',
-    field: '.offer__slider-inner',
-  })
-  ;(0,_modules_tab__WEBPACK_IMPORTED_MODULE_5__["default"])(
-    '.tabheader__item',
-    '.tabcontent',
-    '.tabheader__items',
-    'tabheader__item_active'
-  )
-  ;(0,_modules_timer__WEBPACK_IMPORTED_MODULE_6__["default"])('.timer', '2022-08-11')
-
-
-  // ------*************************************************---------------------
-  //                EASY SLIDER
-  // ------*************************************************---------------------
-
-  // showSlides(slideIndex)
-
-  // if(slides.length < 10){
-  //   total.textContent = `0${slides.length}`
-  // }else{
-  //   total.textContent = slides.length
-  // }
-
-  // function showSlides(idx){
-  //   if(idx > slides.length){
-  //     slideIndex = 1
-  //   }
-  //   if(idx < 1){
-  //     slideIndex = slides.length
-  //   }
-  //   slides.forEach(item => item.style.display = 'none')
-  //   slides[slideIndex - 1].style.display = 'block'
-
-  //   if(slides.length < 10){
-  //     current.textContent = `0${slideIndex}`
-  //   }else{
-  //     current.textContent = slideIndex
-  //   }
-  // }
-
-  // function plusSlides(idx) {
-  //   showSlides(slideIndex += idx)
-  // }
-
-  // next.addEventListener('click', () => {
-  //   plusSlides(1)
-  // })
-
-  // prev.addEventListener('click', () => {
-  //   plusSlides(-1)
-  // })
+    ;(0,_modules_class_js__WEBPACK_IMPORTED_MODULE_0__["default"])()
+    ;(0,_modules_form_js__WEBPACK_IMPORTED_MODULE_1__["default"])('form', modalTimerId)
+    ;(0,_modules_loader_js__WEBPACK_IMPORTED_MODULE_2__["default"])()
+    ;(0,_modules_modal_js__WEBPACK_IMPORTED_MODULE_3__["default"])('[data-modal]', '.modal', modalTimerId)
+    ;(0,_modules_slider_js__WEBPACK_IMPORTED_MODULE_4__["default"])({
+        container: '.offer__slider',
+        nextArrow: '.offer__slider-next',
+        prevArrow: '.offer__slider-prev',
+        slide: '.offer__slide',
+        totalCounter: '#total',
+        currentCounter: '#current',
+        wrapper: '.offer__slider-wrapper',
+        field: '.offer__slider-inner',
+    })
+    ;(0,_modules_tab_js__WEBPACK_IMPORTED_MODULE_5__["default"])(
+        '.tabheader__item',
+        '.tabcontent',
+        '.tabheader__items',
+        'tabheader__item_active'
+    )
+    ;(0,_modules_timer_js__WEBPACK_IMPORTED_MODULE_6__["default"])('.timer', '2023-11-11')
 })
 
 })();

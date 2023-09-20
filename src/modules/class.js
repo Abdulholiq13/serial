@@ -1,4 +1,4 @@
-function clases() {
+function clas() {
     // Class
     class MenuCard {
         constructor(src, alt, title, descr, price, parentSelector, ...classes) {
@@ -58,4 +58,4 @@ function clases() {
     })
 }
 
-export default clases
+export default clas
